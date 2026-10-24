@@ -169,3 +169,10 @@ DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Hardware Shop <norepl
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+
+
+GST_PERCENT = config("GST_PERCENT", default=18, cast=int)
+
+RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="")
+RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET", default="")  # server only, never sent to the browser
+PENDING_ORDER_TIMEOUT_MINUTES = config("PENDING_ORDER_TIMEOUT_MINUTES", default=30, cast=int)

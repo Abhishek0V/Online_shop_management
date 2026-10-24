@@ -3,16 +3,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getProduct } from "../../api/productApi";
 import Loader from "../../components/Loader";
+import QuantityInput from "../../components/QuantityInput";
 import SparePartCard from "../../components/SparePartCard";
 import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
   const { user, isAdmin } = useAuth();
+  const { addItem } = useCart();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [selected, setSelected] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [adding, setAdding] = useState(false);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -21,20 +26,23 @@ export default function ProductDetailPage() {
     setLoading(true);
     setNotFound(false);
     getProduct(slug)
-      .then((res) => { if (!cancelled) { setProduct(res.data); setSelected(0); } })
+      .then((res) => { if (!cancelled) { setProduct(res.data); setSelected(0); setQuantity(1); } })
       .catch(() => !cancelled && setNotFound(true))
       .finally(() => !cancelled && setLoading(false));
     return () => { cancelled = true; };
   }, [slug]);
 
-  // Cart API is connected in the next step; for now only the login check is real.
-  const handleAdd = (item) => {
+  // kind: "product" or "spare_part"
+  const handleAdd = async (kind, item, qty = 1) => {
     if (!user) {
       toast("Please log in to add items to your cart.");
       navigate("/login", { state: { from: `/products/${slug}` } });
       return;
     }
-    toast.success(`"${item.name}" will be added to the cart once the cart is built.`);
+    setAdding(true);
+    const key = kind === "product" ? "product_id" : "spare_part_id";
+    await addItem({ [key]: item.id, quantity: qty }, item.name);
+    setAdding(false);
   };
 
   if (loading) return <Loader />;
@@ -76,7 +84,12 @@ export default function ProductDetailPage() {
           {product.stock === 0 ? <span className="stock-out">Out of stock</span> : <span className="stock-in">In stock ({product.stock} available)</span>}
           {product.description && <p className="description">{product.description}</p>}
           {!isAdmin && (
-            <button type="button" className="btn btn-primary btn-lg" disabled={product.stock === 0} onClick={() => handleAdd(product)}>Add to cart</button>
+            <div className="buy-row">
+              <QuantityInput value={quantity} max={Math.max(product.stock, 1)} onChange={setQuantity} disabled={product.stock === 0} />
+              <button type="button" className="btn btn-primary btn-lg" disabled={product.stock === 0 || adding} onClick={() => handleAdd("product", product, quantity)}>
+                {adding ? "Adding..." : "Add to cart"}
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -87,7 +100,9 @@ export default function ProductDetailPage() {
           <p className="empty-state">No spare parts listed for this product.</p>
         ) : (
           <div className="spare-grid">
-            {product.spare_parts.map((part) => <SparePartCard key={part.id} part={part} onAdd={handleAdd} showAction={!isAdmin} />)}
+            {product.spare_parts.map((part) => (
+              <SparePartCard key={part.id} part={part} onAdd={(p) => handleAdd("spare_part", p)} showAction={!isAdmin} />
+            ))}
           </div>
         )}
       </section>

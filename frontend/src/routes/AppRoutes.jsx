@@ -7,9 +7,11 @@ import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
+import CartPage from "../pages/shop/CartPage";
 import ProductDetailPage from "../pages/shop/ProductDetailPage";
 import ProductListPage from "../pages/shop/ProductListPage";
 
+// Temporary placeholders, replaced as the remaining pages are built.
 const Placeholder = ({ title }) => <div className="page-placeholder"><h1>{title}</h1></div>;
 
 export default function AppRoutes() {
@@ -26,7 +28,9 @@ export default function AppRoutes() {
       <Route path="/reset-password/:uid/:token" element={<ResetPasswordPage />} />
 
       <Route element={<ProtectedRoute roles={["customer"]} />}>
-        <Route path="/cart" element={<Placeholder title="Cart (coming soon)" />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Placeholder title="Checkout (coming next)" />} />
+        <Route path="/my-orders" element={<Placeholder title="My orders (coming soon)" />} />
       </Route>
 
       <Route element={<ProtectedRoute roles={["admin"]} />}>
