@@ -30,9 +30,21 @@ class OrderListSerializer(serializers.ModelSerializer):
 
 class OrderDetailSerializer(OrderListSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
+    invoice_number = serializers.SerializerMethodField()
+    invoice_emailed = serializers.SerializerMethodField()
+
+    def get_invoice_number(self, obj):
+        invoice = getattr(obj, "invoice", None)  # None until the invoice exists
+        return invoice.invoice_number if invoice else None
+
+    def get_invoice_emailed(self, obj):
+        invoice = getattr(obj, "invoice", None)
+        return bool(invoice and invoice.emailed_at)
 
     class Meta(OrderListSerializer.Meta):
-        fields = OrderListSerializer.Meta.fields + SHIPPING_FIELDS + ["subtotal", "gst_percent", "tax_amount", "items"]
+        fields = OrderListSerializer.Meta.fields + SHIPPING_FIELDS + [
+            "subtotal", "gst_percent", "tax_amount", "items", "invoice_number", "invoice_emailed",
+        ]
 
 
 class AdminOrderListSerializer(OrderListSerializer):

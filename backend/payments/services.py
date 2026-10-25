@@ -7,6 +7,7 @@ from rest_framework.exceptions import ValidationError
 
 from cart import services as cart_services
 from cart.models import Cart
+from invoices import services as invoice_services
 from orders import services as order_services
 from orders.models import Order
 
@@ -102,4 +103,8 @@ def report_failed(user, razorpay_order_id) -> Order:
 
 
 def _after_payment(order: Order) -> None:
-    """Hook for work that must follow a successful payment (invoice + email, added in the next step)."""
+    """Create the invoice and email it. A failure here must never undo a successful payment."""
+    try:
+        invoice_services.issue_invoice(order)
+    except Exception:
+        logger.exception("Invoice step failed for order %s (retry with: manage.py send_pending_invoices)", order.order_number)

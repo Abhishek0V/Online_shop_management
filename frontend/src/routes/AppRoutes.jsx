@@ -7,7 +7,12 @@ import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
+import AdminOrderDetailPage from "../pages/admin/AdminOrderDetailPage";
+import AdminOrdersPage from "../pages/admin/AdminOrdersPage";
 import CartPage from "../pages/shop/CartPage";
+import CheckoutPage from "../pages/shop/CheckoutPage";
+import MyOrdersPage from "../pages/shop/MyOrdersPage";
+import OrderDetailPage from "../pages/shop/OrderDetailPage";
 import ProductDetailPage from "../pages/shop/ProductDetailPage";
 import ProductListPage from "../pages/shop/ProductListPage";
 
@@ -29,8 +34,10 @@ export default function AppRoutes() {
 
       <Route element={<ProtectedRoute roles={["customer"]} />}>
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<Placeholder title="Checkout (coming next)" />} />
-        <Route path="/my-orders" element={<Placeholder title="My orders (coming soon)" />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-success/:orderNumber" element={<OrderDetailPage />} />
+        <Route path="/my-orders" element={<MyOrdersPage />} />
+        <Route path="/my-orders/:orderNumber" element={<OrderDetailPage />} />
       </Route>
 
       <Route element={<ProtectedRoute roles={["admin"]} />}>
@@ -38,7 +45,8 @@ export default function AppRoutes() {
         <Route path="/admin/products" element={<AdminProductsPage />} />
         <Route path="/admin/products/new" element={<AdminProductFormPage />} />
         <Route path="/admin/products/:id/edit" element={<AdminProductFormPage />} />
-        <Route path="/admin/orders" element={<Placeholder title="Orders (coming soon)" />} />
+        <Route path="/admin/orders" element={<AdminOrdersPage />} />
+        <Route path="/admin/orders/:orderNumber" element={<AdminOrderDetailPage />} />
       </Route>
 
       <Route path="*" element={<Placeholder title="Page not found" />} />

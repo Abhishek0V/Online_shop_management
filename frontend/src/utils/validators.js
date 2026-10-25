@@ -31,3 +31,8 @@ export const runValidators = (values, rules) =>
       .map(([field, fn]) => [field, fn(values[field] ?? "")])
       .filter(([, message]) => message)
   );
+
+export const validatePincode = (value) => {
+  if (!value.trim()) return "Pincode is required.";
+  return /^\d{6}$/.test(value.trim()) ? "" : "Enter a valid 6-digit pincode.";
+};

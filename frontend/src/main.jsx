@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import "./index.css"; // loads Tailwind
 import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
@@ -13,7 +14,7 @@ createRoot(document.getElementById("root")).render(
         <CartProvider>
           <App />
         </CartProvider>
-      </AuthProvider>
+      </AuthProvider> 
     </BrowserRouter>
   </StrictMode>
 );

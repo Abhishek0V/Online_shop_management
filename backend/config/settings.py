@@ -129,11 +129,12 @@ STATIC_URL = 'static/'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
 
 MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
@@ -176,3 +177,9 @@ GST_PERCENT = config("GST_PERCENT", default=18, cast=int)
 RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="")
 RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET", default="")  # server only, never sent to the browser
 PENDING_ORDER_TIMEOUT_MINUTES = config("PENDING_ORDER_TIMEOUT_MINUTES", default=30, cast=int)
+
+
+
+SHOP_NAME = config("SHOP_NAME", default="Hardware Shop")
+SHOP_ADDRESS = config("SHOP_ADDRESS", default="")
+SHOP_GSTIN = config("SHOP_GSTIN", default="")
