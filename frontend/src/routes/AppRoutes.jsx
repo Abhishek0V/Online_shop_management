@@ -15,9 +15,7 @@ import MyOrdersPage from "../pages/shop/MyOrdersPage";
 import OrderDetailPage from "../pages/shop/OrderDetailPage";
 import ProductDetailPage from "../pages/shop/ProductDetailPage";
 import ProductListPage from "../pages/shop/ProductListPage";
-
-// Temporary placeholders, replaced as the remaining pages are built.
-const Placeholder = ({ title }) => <div className="page-placeholder"><h1>{title}</h1></div>;
+import NotFoundPage from "../components/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -49,7 +47,7 @@ export default function AppRoutes() {
         <Route path="/admin/orders/:orderNumber" element={<AdminOrderDetailPage />} />
       </Route>
 
-      <Route path="*" element={<Placeholder title="Page not found" />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
