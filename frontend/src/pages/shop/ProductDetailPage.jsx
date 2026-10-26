@@ -268,8 +268,20 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            {/* Add to cart */}
-            {!isAdmin && (
+            {isAdmin ? (
+              <div className="border-t border-stone-100 pt-5">
+                <Link
+                  to={`/admin/products/${product.id}/edit`}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#242424] px-5 py-3 text-[10px] font-black uppercase tracking-wider text-white transition hover:bg-[#d8a500] hover:text-black"
+                >
+                  <Wrench size={16} />
+                  Edit Product (Admin)
+                </Link>
+                <p className="mt-2 text-[10px] text-stone-500">
+                  You are viewing this as admin. Click above to edit details, pricing, images, or spare parts.
+                </p>
+              </div>
+            ) : (
               <div className="border-t border-stone-100 pt-5">
                 <p className="mb-3 text-[10px] font-black uppercase tracking-wider">
                   Select quantity

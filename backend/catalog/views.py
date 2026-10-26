@@ -28,7 +28,7 @@ class ProductListView(generics.ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = StandardPagination
     filter_backends = [SearchFilter]
-    search_fields = ["name", "brand", "model_code"]
+    search_fields = ["name", "brand", "model_code", "description"]
 
     def get_queryset(self):
         return Product.objects.filter(is_active=True).prefetch_related("images")
@@ -54,7 +54,7 @@ class AdminProductViewSet(viewsets.ModelViewSet):
     pagination_class = StandardPagination
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     filter_backends = [SearchFilter]
-    search_fields = ["name", "brand", "model_code"]
+    search_fields = ["name", "brand", "model_code", "description"]
 
     def get_queryset(self):
         return Product.objects.prefetch_related("images", "spare_parts")

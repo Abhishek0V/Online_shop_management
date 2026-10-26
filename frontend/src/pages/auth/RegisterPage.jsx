@@ -407,16 +407,13 @@ export default function RegisterPage() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-bold text-[#987000] hover:underline"
+              className="font-bold text-[#987000] transition-colors hover:text-black"
             >
               Login
             </Link>
           </p>
 
-          <p className="mt-4 flex items-center justify-center gap-1.5 text-[10px] text-stone-500">
-            <ShieldCheck size={14} className="text-green-700" />
-            Your account details are protected.
-          </p>
+         
         </section>
       </div>
     </main>

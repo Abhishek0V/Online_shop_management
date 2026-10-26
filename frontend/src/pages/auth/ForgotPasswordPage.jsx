@@ -59,7 +59,6 @@ export default function ForgotPasswordPage() {
           </p>
         </div>
 
-        {/* FORM */}
         {sentMessage ? (
           <div
             role="status"

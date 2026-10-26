@@ -29,11 +29,12 @@ import ProductCard from "../../components/ProductCard";
 const PAGE_SIZE = 8;
 
 const categories = [
-  "Power Tools",
-  "Hand Tools",
-  "Electrical",
-  "Accessories",
-  "Safety",
+  { label: "All Products", query: "" },
+  { label: "Grinders", query: "Grinder" },
+  { label: "Drills", query: "Drill" },
+  { label: "Bosch", query: "Bosch" },
+  { label: "INGCO", query: "INGCO" },
+  { label: "Power Tools", query: "Tools" },
 ];
 
 const money = (price) =>
@@ -119,9 +120,9 @@ export default function ProductListPage() {
     });
   };
 
-  const searchCategory = (category) => {
-    setInput(category);
-    updateParams({ search: category, page: 1 });
+  const searchCategory = (categoryQuery) => {
+    setInput(categoryQuery);
+    updateParams({ search: categoryQuery, page: 1 });
     scrollToProducts();
   };
 
@@ -182,12 +183,8 @@ export default function ProductListPage() {
             </div>
 
             {/* SIDE BANNER */}
-            <div className="relative min-h-[230px] overflow-hidden bg-[#e8b91f] md:col-span-4">
-              <img
-                src="https://images.unsplash.com/photo-1581147036324-c1c89c2c8b5c?auto=format&fit=crop&w=700&q=85"
-                alt="Tools for a professional workshop"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+            <div className="relative min-h-[230px] overflow-hidden bg-[#e8b91f] md:col-span-4 p-2">
+              
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#f5c32c] via-[#f5c32c]/60 to-transparent" />
 
@@ -318,15 +315,25 @@ export default function ProductListPage() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => searchCategory(category)}
-                className="bg-[#262626] px-4 py-3 text-[10px] font-black uppercase tracking-wide text-white transition hover:bg-[#f5c32c] hover:text-black sm:px-5"
-              >
-                {category}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const isActive =
+                (cat.query === "" && !query) ||
+                (cat.query && query.toLowerCase() === cat.query.toLowerCase());
+
+              return (
+                <button
+                  key={cat.label}
+                  onClick={() => searchCategory(cat.query)}
+                  className={`px-4 py-3 text-[10px] font-black uppercase tracking-wide transition sm:px-5 ${
+                    isActive
+                      ? "bg-[#f5c32c] text-black ring-1 ring-black/10"
+                      : "bg-[#262626] text-white hover:bg-[#f5c32c] hover:text-black"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </section>
 
@@ -336,9 +343,6 @@ export default function ProductListPage() {
 
             <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#b58a00]">
-                  Quality you can trust
-                </p>
 
                 <h2 className="mt-2 text-2xl font-black uppercase sm:text-3xl">
                   {query ? "Search Results" : "Our Products"}
@@ -368,7 +372,7 @@ export default function ProductListPage() {
               {query && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs font-bold text-[#987000] hover:underline"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3 py-1 text-xs font-bold text-stone-700 transition hover:bg-[#f5c32c] hover:text-black"
                 >
                   Clear search: "{query}" ×
                 </button>

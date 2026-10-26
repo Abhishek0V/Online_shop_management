@@ -88,7 +88,7 @@ export default function OrderDetailPage() {
   return (
     <main className="min-h-screen bg-[#f7f7f5] px-3 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto max-w-6xl">
-        {/* PAGE INTRO */}
+        
         <div className="mb-6 flex flex-col gap-4 border-b border-stone-200 pb-5 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Link
@@ -125,7 +125,6 @@ export default function OrderDetailPage() {
           )}
         </div>
 
-        {/* PAYMENT SUCCESS */}
         {isSuccessPage && paid && (
           <section className="mb-8 overflow-hidden border border-stone-200 bg-white">
             <div className="h-1.5 bg-[#f5c32c]" />
@@ -211,7 +210,6 @@ export default function OrderDetailPage() {
           </section>
         )}
 
-        {/* UNPAID WARNING */}
         {isSuccessPage && !paid && (
           <section
             role="alert"

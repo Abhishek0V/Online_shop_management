@@ -83,7 +83,6 @@ export default function ResetPasswordPage() {
           </p>
         </div>
 
-        {/* INVALID LINK OR API ERROR */}
         {linkError && (
           <div
             role="alert"
@@ -100,7 +99,6 @@ export default function ResetPasswordPage() {
           </div>
         )}
 
-        {/* PASSWORD FORM */}
         <form onSubmit={handleSubmit} noValidate>
           <FormField
             label="New password"
@@ -141,7 +139,6 @@ export default function ResetPasswordPage() {
           </button>
         </form>
 
-        {/* BACK TO LOGIN */}
         <div className="mt-7 border-t border-stone-200 pt-5">
           <Link
             to="/login"

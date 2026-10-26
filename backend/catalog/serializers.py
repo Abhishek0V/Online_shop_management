@@ -49,9 +49,22 @@ class ProductDetailSerializer(ProductListSerializer):
 # ---------------- Admin ----------------
 
 class AdminSparePartSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        required=False,
+        allow_null=True,
+        validators=[image_extension_validator, validate_image_size],
+    )
+
     class Meta:
         model = SparePart
         fields = ["id", "product", "name", "part_code", "description", "price", "stock", "image", "is_active"]
+
+    def to_internal_value(self, data):
+        if hasattr(data, "copy"):
+            data = data.copy()
+        if data.get("image") == "":
+            data["image"] = None
+        return super().to_internal_value(data)
 
     def validate(self, attrs):
         product = attrs.get("product", getattr(self.instance, "product", None))

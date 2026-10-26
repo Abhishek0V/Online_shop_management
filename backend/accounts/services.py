@@ -15,7 +15,7 @@ def send_password_reset_email(email: str) -> None:
         return
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
-    link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}/"
+    link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
     send_mail(
         subject="Reset your Hardware Shop password",
         message=(

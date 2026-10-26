@@ -62,35 +62,39 @@ export default function Navbar() {
   // Admin pages: minimal navbar
   if (isAdminPage) {
     return (
-      <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-[#242424]">
+      <header className="sticky top-0 z-50 w-full border-b border-stone-800 bg-[#242424]">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           {/* Logo */}
-          <Link to="/admin/products" className="flex items-center gap-2">
-            <span className="flex h-10 w-10 items-center justify-center bg-[#f5c32c] text-black">
-              <Hammer size={24} strokeWidth={2.3} />
+          <Link to="/admin/products" className="group flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-md bg-[#f5c32c] text-black transition-transform duration-200 group-hover:scale-105">
+              <Hammer size={22} strokeWidth={2.3} />
             </span>
-            <span className="text-lg font-black uppercase tracking-tight text-white">
+            <span className="text-lg font-black uppercase tracking-tight text-white transition-colors group-hover:text-[#f5c32c]">
               Forge <span className="text-[10px] font-bold tracking-widest text-stone-400">ADMIN</span>
             </span>
           </Link>
 
           {/* Admin nav links */}
-          <nav className="hidden items-center gap-5 text-[11px] font-bold uppercase text-stone-300 sm:flex">
+          <nav className="hidden items-center gap-2 text-[11px] font-bold uppercase text-stone-300 sm:flex">
             <Link
               to="/admin/products"
-              className={`flex items-center gap-1.5 transition hover:text-[#f5c32c] ${path.includes("/admin/products") ? "text-[#f5c32c]" : ""}`}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-all hover:bg-stone-800 hover:text-[#f5c32c] ${
+                path.includes("/admin/products") ? "bg-stone-800 text-[#f5c32c]" : ""
+              }`}
             >
               <Package size={14} /> Products
             </Link>
             <Link
               to="/admin/orders"
-              className={`flex items-center gap-1.5 transition hover:text-[#f5c32c] ${path.includes("/admin/orders") ? "text-[#f5c32c]" : ""}`}
+              className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-all hover:bg-stone-800 hover:text-[#f5c32c] ${
+                path.includes("/admin/orders") ? "bg-stone-800 text-[#f5c32c]" : ""
+              }`}
             >
               <ClipboardList size={14} /> Orders
             </Link>
             <Link
               to="/"
-              className="flex items-center gap-1.5 transition hover:text-stone-100"
+              className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-stone-400 transition-all hover:bg-stone-800 hover:text-white"
             >
               <ArrowLeft size={14} /> Back to Shop
             </Link>
@@ -108,7 +112,7 @@ export default function Navbar() {
               onClick={handleLogout}
               aria-label="Logout"
               title="Logout"
-              className="flex items-center gap-1.5 p-2 text-stone-400 transition hover:text-white"
+              className="flex items-center gap-1.5 rounded-md p-2 text-stone-400 transition-all hover:bg-stone-800 hover:text-red-400 active:scale-95"
             >
               <LogOut size={18} />
               <span className="hidden text-[10px] font-bold uppercase sm:block">Logout</span>
@@ -128,40 +132,40 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={closeMenu}
-          className="flex shrink-0 items-center gap-2"
+          className="group flex shrink-0 items-center gap-2.5"
         >
-          <span className="flex h-11 w-11 items-center justify-center bg-[#f5c32c] text-black">
-            <Hammer size={27} strokeWidth={2.3} />
+          <span className="flex h-11 w-11 items-center justify-center rounded-md bg-[#f5c32c] text-black transition-transform duration-200 group-hover:scale-105">
+            <Hammer size={26} strokeWidth={2.3} />
           </span>
-          <span className="text-xl font-black uppercase tracking-tight text-stone-900 sm:text-2xl">
+          <span className="text-xl font-black uppercase tracking-tight text-stone-900 transition-colors group-hover:text-[#a17b00] sm:text-2xl">
             Forge<span className="text-[#d8a500]">.</span>
           </span>
         </Link>
 
         {/* Desktop nav links — shown on homepage only */}
         {isHomePage && (
-          <nav className="hidden items-center gap-6 text-[11px] font-extrabold uppercase text-black xl:flex">
-            <a href="#home" className="hover:text-[#b48600]">Home</a>
-            <a href="#categories" className="hover:text-[#b48600]">Categories</a>
-            <a href="#products" className="hover:text-[#b48600]">Products</a>
-            <a href="#offers" className="hover:text-[#b48600]">Offers</a>
+          <nav className="hidden items-center gap-1 text-[11px] font-extrabold uppercase text-stone-800 xl:flex">
+            <a href="#home" className="rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">Home</a>
+            <a href="#categories" className="rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">Categories</a>
+            <a href="#products" className="rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">Products</a>
+            <a href="#offers" className="rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">Offers</a>
           </nav>
         )}
 
         {/* Non-homepage desktop nav: simple breadcrumb-style links */}
         {!isHomePage && (
-          <nav className="hidden items-center gap-5 text-[11px] font-bold uppercase text-stone-500 xl:flex">
-            <Link to="/" className="flex items-center gap-1.5 transition hover:text-[#b48600]">
+          <nav className="hidden items-center gap-2 text-[11px] font-bold uppercase text-stone-500 xl:flex">
+            <Link to="/" className="flex items-center gap-1.5 rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">
               <ArrowLeft size={13} /> Shop
             </Link>
             {user && !isAdmin && (
-              <Link to="/my-orders" className="transition hover:text-[#b48600]">My Orders</Link>
+              <Link to="/my-orders" className="rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">My Orders</Link>
             )}
             {user && !isAdmin && (
-              <Link to="/cart" className="relative transition hover:text-[#b48600]">
+              <Link to="/cart" className="relative flex items-center gap-1.5 rounded-md px-3 py-2 transition-all hover:bg-stone-100 hover:text-[#b48600]">
                 Cart
                 {itemCount > 0 && (
-                  <span className="ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f5c32c] px-1 text-[9px] font-black text-black">
+                  <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f5c32c] px-1 text-[9px] font-black text-black">
                     {itemCount}
                   </span>
                 )}
@@ -174,7 +178,7 @@ export default function Navbar() {
         {isHomePage && (
           <form
             onSubmit={handleSearch}
-            className="hidden w-full max-w-[230px] items-center border border-stone-300 px-3 py-2 md:flex"
+            className="hidden w-full max-w-[240px] items-center rounded-md border border-stone-300 px-3 py-2 transition-colors focus-within:border-[#f5c32c] focus-within:ring-1 focus-within:ring-[#f5c32c] md:flex"
           >
             <input
               value={search}
@@ -183,7 +187,11 @@ export default function Navbar() {
               aria-label="Search products"
               className="min-w-0 flex-1 bg-transparent text-xs outline-none"
             />
-            <button type="submit" aria-label="Search">
+            <button
+              type="submit"
+              aria-label="Search"
+              className="rounded p-1 text-stone-500 transition-colors hover:bg-stone-100 hover:text-black"
+            >
               <Search size={16} />
             </button>
           </form>
@@ -196,11 +204,11 @@ export default function Navbar() {
             <Link
               to="/cart"
               aria-label={`Cart, ${itemCount} items`}
-              className="relative p-2 transition hover:bg-stone-100"
+              className="relative rounded-md p-2.5 text-stone-700 transition-all hover:bg-stone-100 hover:text-[#a17b00] active:scale-95"
             >
               <ShoppingCart size={20} />
               {itemCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f5c32c] px-1 text-[9px] font-black">
+                <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f5c32c] px-1 text-[9px] font-black text-black shadow-sm">
                   {itemCount}
                 </span>
               )}
@@ -209,7 +217,7 @@ export default function Navbar() {
 
           {user ? (
             <>
-              <span className="hidden items-center gap-1.5 px-2 text-xs font-semibold text-stone-600 sm:flex">
+              <span className="hidden items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-stone-700 sm:flex">
                 <UserRound size={17} />
                 {user.first_name}
               </span>
@@ -218,7 +226,7 @@ export default function Navbar() {
                 onClick={handleLogout}
                 aria-label="Logout"
                 title="Logout"
-                className="hidden p-2 hover:bg-stone-100 sm:block"
+                className="hidden rounded-md p-2 text-stone-500 transition-all hover:bg-red-50 hover:text-red-600 active:scale-95 sm:block"
               >
                 <LogOut size={19} />
               </button>
@@ -228,13 +236,13 @@ export default function Navbar() {
               <Link
                 to="/login"
                 aria-label="Login"
-                className="p-2 transition hover:bg-stone-100"
+                className="rounded-md p-2.5 text-stone-700 transition-all hover:bg-stone-100 hover:text-[#a17b00] active:scale-95"
               >
                 <UserRound size={20} />
               </Link>
               <Link
                 to="/register"
-                className="hidden bg-[#f5c32c] px-4 py-3 text-[10px] font-black uppercase transition hover:bg-[#e7b51b] sm:block"
+                className="hidden rounded-md bg-[#f5c32c] px-4 py-2.5 text-[10px] font-black uppercase tracking-wider text-black transition-all hover:bg-[#e7b51b] hover:shadow-sm active:scale-95 sm:block"
               >
                 Register
               </Link>
@@ -247,7 +255,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="p-2 hover:bg-stone-100 xl:hidden"
+            className="rounded-md p-2 text-stone-700 transition-all hover:bg-stone-100 hover:text-black active:scale-95 xl:hidden"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -274,26 +282,26 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="border-t border-stone-200 bg-white px-4 py-3 xl:hidden">
-          <nav className="flex flex-col text-xs font-bold uppercase">
+          <nav className="flex flex-col gap-1 text-xs font-bold uppercase">
             {isHomePage ? (
               <>
-                <a href="#home" onClick={closeMenu} className="border-b border-stone-100 py-3">Home</a>
-                <a href="#categories" onClick={closeMenu} className="border-b border-stone-100 py-3">Categories</a>
-                <a href="#products" onClick={closeMenu} className="border-b border-stone-100 py-3">Products</a>
-                <a href="#offers" onClick={closeMenu} className="border-b border-stone-100 py-3">Offers</a>
+                <a href="#home" onClick={closeMenu} className="rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">Home</a>
+                <a href="#categories" onClick={closeMenu} className="rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">Categories</a>
+                <a href="#products" onClick={closeMenu} className="rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">Products</a>
+                <a href="#offers" onClick={closeMenu} className="rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">Offers</a>
               </>
             ) : (
-              <Link to="/" onClick={closeMenu} className="flex items-center gap-2 border-b border-stone-100 py-3">
+              <Link to="/" onClick={closeMenu} className="flex items-center gap-2 rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">
                 <ArrowLeft size={14} /> Back to Shop
               </Link>
             )}
 
             {user && !isAdmin && (
               <>
-                <Link to="/my-orders" onClick={closeMenu} className="flex items-center gap-2 border-b border-stone-100 py-3">
+                <Link to="/my-orders" onClick={closeMenu} className="flex items-center gap-2 rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">
                   <ClipboardList size={15} /> My Orders
                 </Link>
-                <Link to="/cart" onClick={closeMenu} className="flex items-center gap-2 border-b border-stone-100 py-3">
+                <Link to="/cart" onClick={closeMenu} className="flex items-center gap-2 rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">
                   <ShoppingCart size={15} /> Cart {itemCount > 0 && `(${itemCount})`}
                 </Link>
               </>
@@ -303,14 +311,14 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-2 py-3 text-left text-red-600"
+                className="flex items-center gap-2 rounded-md px-3 py-2.5 text-left text-red-600 transition-colors hover:bg-red-50"
               >
                 <LogOut size={15} /> Logout
               </button>
             ) : (
               <>
-                <Link to="/login" onClick={closeMenu} className="border-b border-stone-100 py-3">Login</Link>
-                <Link to="/register" onClick={closeMenu} className="py-3 text-[#987000]">Create Account</Link>
+                <Link to="/login" onClick={closeMenu} className="rounded-md px-3 py-2.5 transition-colors hover:bg-stone-100 hover:text-[#a17b00]">Login</Link>
+                <Link to="/register" onClick={closeMenu} className="rounded-md px-3 py-2.5 text-[#987000] transition-colors hover:bg-stone-100">Create Account</Link>
               </>
             )}
           </nav>

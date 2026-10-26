@@ -162,7 +162,10 @@ PASSWORD_RESET_TIMEOUT = 3600  # seconds
  
 # Development: print emails to the terminal. Switch to SMTP later for the invoice test.
 
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Hardware Shop <noreply@hardwareshop.local>")
+DEFAULT_FROM_EMAIL = config(
+    "DEFAULT_FROM_EMAIL",
+    default=f"Hardware Shop <{EMAIL_HOST_USER}>" if EMAIL_HOST_USER else "Hardware Shop <noreply@hardwareshop.local>",
+)
 
 
 

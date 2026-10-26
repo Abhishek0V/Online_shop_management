@@ -122,15 +122,6 @@ export default function LoginPage() {
               <br />
               back.
             </h1>
-
-            <p className="mt-3 text-sm leading-6 text-[#423720]">
-              Your next project starts with the right tools.
-            </p>
-
-            <div className="mt-5 flex items-center gap-2">
-              <Wrench size={20} />
-              <span className="text-xs font-bold">Build with confidence.</span>
-            </div>
           </div>
 
           <div className="relative z-10 mt-5 hidden sm:block">
@@ -202,7 +193,7 @@ export default function LoginPage() {
 
                 <Link
                   to="/forgot-password"
-                  className="text-[11px] font-semibold text-[#987000] hover:underline"
+                  className="text-[11px] font-semibold text-[#987000] transition-colors hover:text-black"
                 >
                   Forgot password?
                 </Link>
@@ -261,7 +252,7 @@ export default function LoginPage() {
               disabled={submitting}
               className="flex w-full items-center justify-center rounded-md bg-[#242424] px-4 py-3.5 text-xs font-black uppercase tracking-widest text-white transition hover:bg-[#d6a600] hover:text-black disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {submitting ? "Logging in..." : "Login to Account"}
+              {submitting ? "Logging in..." : "Login "}
             </button>
           </form>
 
@@ -271,7 +262,7 @@ export default function LoginPage() {
             New to Forge?{" "}
             <Link
               to="/register"
-              className="font-bold text-[#987000] hover:underline"
+              className="font-bold text-[#987000] transition-colors hover:text-black"
             >
               Sign up
             </Link>
